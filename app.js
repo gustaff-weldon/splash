@@ -1,4 +1,5 @@
 ( function() {
+    //factory
     splash
         .factory( "greeter", function() {
             return {
@@ -16,6 +17,7 @@
     } );
 
 
+    // create
     function Messenger( dependencies ) {
         this.greeter = dependencies.greeter;
     }
@@ -27,4 +29,10 @@
     Messenger.$deps = [ "greeter" ];
 
     splash.create( Messenger ).say( "Hello" );
+
+
+    // get
+    splash.get( "cook" ).cook();
+
+
 } () );

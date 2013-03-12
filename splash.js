@@ -56,6 +56,10 @@ r4
                 dependencies[ name ] = this.create( this.factories[ name ] );
             }
             return new constructor( dependencies )
+        },
+
+        get: function( name ) {
+            return this.create( this.factories[ name ] );
         }
 
     };
