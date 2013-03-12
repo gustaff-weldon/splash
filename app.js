@@ -8,11 +8,11 @@
             }
         } )
         .factory( "cook", function() {
-        return {
-            cook: function() {
-                console.log( "Cooking dinner" );
+            return {
+                cook: function() {
+                    console.log( "Cooking dinner" );
+                }
             }
-        }
     } );
 
 

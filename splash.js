@@ -30,11 +30,10 @@ r4
 
 
 */
-
 ( function( undefined ) {
 
     function _resolve( dependant ) {
-        return dependant.$deps;
+        return dependant.$deps ? dependant.$deps : [];
     }
 
     function Injector() {
@@ -54,7 +53,7 @@ r4
                 name;
             for ( var i = 0, len = deps.length; i < len; i++ ) {
                 name = deps[ i ];
-                dependencies[ name ] = new this.factories[ name ];
+                dependencies[ name ] = this.create( this.factories[ name ] );
             }
             return new constructor( dependencies )
         }
