@@ -1,0 +1,13 @@
+{
+    "name": "splash",
+    "description": "Splash your dependencies onto your code",
+    "author": [
+        "Gustaff Weldon"
+    ],
+    "version": "0.0.1",
+    "main": "./lib/splash",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/gustaff-weldon/splash.git"
+    }
+}

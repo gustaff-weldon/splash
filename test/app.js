@@ -32,7 +32,24 @@
 
 
     // get
+
     splash.get( "cook" ).cook();
+
+    // invoke
+    // splash.factory( "operation", function() {
+    //     return function add( a, b ) {
+    //         return a + b;
+    //     }
+    // } );
+
+
+    // function calculate( dependencies, a, b ) {
+    //     dependencies.operation( a, b );
+    // }
+
+    // calculate.$deps = [ "operation" ];
+
+    // splash.invoke( calculate, 3, 5 );
 
 
 } () );
