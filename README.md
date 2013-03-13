@@ -3,7 +3,7 @@ A spattering dependency injection ;)
 
 ## Dependency injection
 
-`splash.factory` to register depenency constructors. Dependencies can have their own dependencies. See dependency annotation.
+`splash.factory` to register depenency constructors. Dependencies can have their own dependencies. See [dependency annotation](#dependency-annotation).
 
 ```js
 splash.factory( "greeter", function() {
