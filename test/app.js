@@ -1,4 +1,13 @@
 ( function() {
+
+    function Messenger( greeter ) {
+        this.greeter = greeter;
+    }
+
+    Messenger.prototype.say = function( message ) {
+        this.greeter.greet( message );
+    }
+
     //factory
     splash
         .factory( "greeter", function() {
@@ -14,21 +23,19 @@
                     console.log( "Cooking dinner" );
                 }
             }
-    } );
+        } ).factory( "messenger", [ "greeter" ], function( greeter ) {
+            return new Messenger( greeter );
+        });
+
+
+    // get
+    splash.get( "messenger" ).say( "Hello" );
 
 
     // create
-    function Messenger( dependencies ) {
-        this.greeter = dependencies.greeter;
-    }
-
-    Messenger.prototype.say = function( message ) {
-        this.greeter.greet( message );
-    }
-
-    Messenger.$deps = [ "greeter" ];
-
-    splash.create( Messenger ).say( "Hello" );
+    // splash.create( [ "greeter", function( greeter ) {
+    //     return new Messenger( greeter );
+    // } ).say( "Hello" );
 
 
     // get

@@ -1,9 +1,21 @@
 <html>
 <head>
     <title>Splash</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="mocha.css" />
 </head>
 <body>
-    <script type="text/javascript" src="../lib/splash.js"></script>
-    <script type="text/javascript" src="app.js"></script>
+    <div id="mocha"></div>
+    <script src="mocha.js"></script>
+    <script src="chai.js"></script>
+    <script>
+	mocha.setup('bdd')
+	assert = chai.assert
+    </script>
+    <script type="text/javascript" src="../lib/splash.args.js"></script>
+    <script type="text/javascript" src="splash-test.js"></script>
+    <script>
+      mocha.run();
+    </script>
 </body>
 </html>
