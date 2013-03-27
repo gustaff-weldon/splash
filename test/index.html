@@ -2,8 +2,9 @@
 <head>
     <title>Splash</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mocha.css" />
-</head>
+  </head>
 <body>
     <div id="mocha"></div>
     <script src="mocha.js"></script>
@@ -12,8 +13,8 @@
 	mocha.setup('bdd')
 	assert = chai.assert
     </script>
-    <script type="text/javascript" src="../lib/splash.args.js"></script>
-    <script type="text/javascript" src="splash-test.js"></script>
+    <script src="../lib/splash.js"></script>
+    <script src="splash-test.js"></script>
     <script>
       mocha.run();
     </script>

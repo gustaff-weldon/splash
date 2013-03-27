@@ -10,20 +10,20 @@
 
     //factory
     splash
-        .factory( "greeter", function() {
+        .register( "greeter", function() {
             return {
                 greet: function( message ) {
                     console.log( "Greeter says:", message )
                 }
             }
         } )
-        .factory( "cook", function() {
+        .register( "cook", function() {
             return {
                 cook: function() {
                     console.log( "Cooking dinner" );
                 }
             }
-        } ).factory( "messenger", [ "greeter" ], function( greeter ) {
+        } ).register( "messenger", [ "greeter" ], function( greeter ) {
             return new Messenger( greeter );
         });
 
@@ -43,7 +43,7 @@
     splash.get( "cook" ).cook();
 
     // invoke
-    // splash.factory( "operation", function() {
+    // splash.register( "operation", function() {
     //     return function add( a, b ) {
     //         return a + b;
     //     }
