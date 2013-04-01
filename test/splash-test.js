@@ -1,22 +1,29 @@
 describe( "Splash", function() {
 
-    it( "should expose Injector constructor", function() {
-        assert.isDefined( splash.Injector );
-    });
-
-
-    it( "should be instance of Injector", function() {
-        assert.ok( splash instanceof splash.Injector );
-    });
-
-
-    describe( ".Injector", function() {
+    describe( ".container", function() {
         var injector;
 
         beforeEach( function() {
-            injector = new splash.Injector();
+            injector = splash.container();
         } );
 
+
+        it( "should create new child container with parent factories", function() {
+            var parent = splash.container(),
+                name = "test",
+                factory = function() {};
+
+            parent.register( name, factory );
+
+            var descendant = parent.container();
+            assert.isObject( descendant );
+
+            assert.isDefined( descendant._factories[ name ] );
+            assert.isObject( descendant._factories[ name ] );
+            assert.isDefined( descendant._factories[ name ].value );
+            assert.equal( descendant._factories[ name ].value, factory );
+            assert.isDefined( descendant._factories[ name ].deps );
+        } )
 
         it( "should play nice with multiple deps chain", function() {
 
@@ -107,6 +114,7 @@ describe( "Splash", function() {
                 assert.deepEqual( result.deps, [ "foo", "bar" ] );
                 assert.deepEqual( result.value, factory );
 
+                // no dependencies
                 result = injector._resolve( [ factory ] )
 
                 assert.deepEqual( result.deps, [] );
@@ -152,9 +160,19 @@ describe( "Splash", function() {
                     var name = "test" + i;
                     injector.register( name, factories[ i ] );
                     assert.isDefined( injector._factories[ name ] );
-                    assert.equal( injector._factories[ name ], factories[ i ] );
+                    assert.isObject( injector._factories[ name ] );
+                    assert.isDefined( injector._factories[ name ].value );
+                    assert.isDefined( injector._factories[ name ].deps );
                 }
 
+            } );
+
+            it( "should store options", function() {
+                var factory = function() {},
+                    options = { scope: "singleton" };
+
+                injector.register( "test", factory, options );
+                assert.equal( injector._factories[ "test" ].options, options );
             } );
 
 
@@ -167,6 +185,7 @@ describe( "Splash", function() {
 
 
         describe( ".get", function() {
+
 
             it( "should return value for function without $deps ", function() {
                 var factory = function() { return "test result" };
@@ -219,6 +238,19 @@ describe( "Splash", function() {
 
                 injector.register( "test", factory );
                 assert.equal( injector.get( "test" ), factory );
+            } );
+
+
+            it( "should return cached value for singletons", function() {
+                var count = 0;
+                var factory = function() {
+                    ++count;
+                    return "count " + count;
+                };
+
+                injector.register( "test", factory, { scope: "singleton" } );
+                assert.equal( injector.get( "test" ), "count 1" );
+                assert.equal( injector.get( "test" ), "count 1" );
             } );
 
         } );

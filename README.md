@@ -34,11 +34,11 @@ function messenger( greeter ) {
 splash.invoke( messenger ).talk();
 ```
 
-`splash.Injector` to obtain contructor for creating injector objects. `splash` itself is an instance of Injector.
+`splash.container` to obtain DI container instance. `splash` itself is an instance of container. Created container will inherit all factories registered on parent container.
 
 ```js
-var myInjector =  new splash.Injector();
-myInjector.register( "foo", function( bar ) {
+var myContainer = splash.container();
+myContainer.register( "foo", function( bar ) {
     bar.sth();
 } )
 ```
@@ -93,5 +93,23 @@ splash
 
 `.invoke( factory )`
 
-`.Injector`
+`.container()`
 
+
+## Changelog
+
+### Upcoming release
+
+- renamed `.injector` method to `.container`
+- created container inherits factories from parent container
+- added options to `.register` function ( now only scope paramater is checked, instances cached when asked to be singleton )
+
+### 0.0.1
+
+- `._resolve` returns object with dependencies and factory
+- `.get` checks if dependency exists, error is thrown when dependency cannot be found
+- `.create` renamed to `.invoke` ( it no longer instantiates objects, just invokes factory ),
+- `.factory` renamed to `.register` cause it now accepts not only functions but also objects and primitives
+- updated documentation
+- updated tests, added tests for .Injector, .get, .factory for various factory values
+- fixed node check test
