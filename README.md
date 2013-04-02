@@ -1,6 +1,18 @@
 # Splash
 A spattering dependency injection ;)
 
+## API
+splash
+
+`.register( name, factory )`
+
+`.get( name )`
+
+`.invoke( factory )`
+
+`.container()`
+
+
 ## Dependency injection
 
 `splash.register` to register dependency providers. A provider may be a factory function or object or even primitive value ( excluding array ). Providers can have their own dependencies. See [dependency annotation](#dependency-annotation).
@@ -43,7 +55,6 @@ myContainer.register( "foo", function( bar ) {
 } )
 ```
 
-
 ## Dependency annotation
 
 Factories might depend on other factories. Splash supports three ways of defining such dependencies when registering factory via `.register` method.
@@ -84,22 +95,42 @@ splash.register( "foo", [ "foo", function( bar ) {
 } ] );
 ```
 
-## API
-splash
+## Dependency scopes
 
-`.register( name, factory )`
+When factory is registered it can be specified what would be the scope of objects obtained through this factory.
 
-`.get( name )`
+### `container` (default)
+In `container` scope there's only single object instance per container for a given factory.
 
-`.invoke( factory )`
+```js
+splash.register( "foo", function() {
+    return new Object();
+} );
 
-`.container()`
+var foo1 = splash.get( "foo" );
+var foo2 = splash.get( "foo" );
 
+assert.equals( foo1, foo2 ); //TRUE
+```
+
+The above `.register` call is equivalent to:
+
+```js
+splash.register( "foo", function() {
+    return new Object();
+}, {
+    scope: "container"
+} );
+```
 
 ## Changelog
 
 ### Upcoming release
-...
+TBD
+
+### 0.0.3
+- introduced `container` scope - only one instance of dependency per container instance
+- all registered factories have `container` scope by default
 
 ### 0.0.2
 

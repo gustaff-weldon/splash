@@ -169,10 +169,10 @@ describe( "Splash", function() {
 
             it( "should store options", function() {
                 var factory = function() {},
-                    options = { scope: "singleton" };
+                    options = { scope: "container" };
 
                 injector.register( "test", factory, options );
-                assert.equal( injector._factories[ "test" ].options, options );
+                assert.deepEqual( injector._factories[ "test" ].options, options );
             } );
 
 
@@ -240,15 +240,39 @@ describe( "Splash", function() {
                 assert.equal( injector.get( "test" ), factory );
             } );
 
-
-            it( "should return cached value for singletons", function() {
+            it( "should return cached value for default scope (container)", function() {
                 var count = 0;
                 var factory = function() {
                     ++count;
                     return "count " + count;
                 };
 
-                injector.register( "test", factory, { scope: "singleton" } );
+                injector.register( "test", factory );
+                assert.equal( injector.get( "test" ), "count 1" );
+                assert.equal( injector.get( "test" ), "count 1" );
+            } );
+
+            it( "should return cached value for container scope", function() {
+                var count = 0;
+                var factory = function() {
+                    ++count;
+                    return "count " + count;
+                };
+
+                injector.register( "test", factory, { scope: "container" } );
+                assert.equal( injector.get( "test" ), "count 1" );
+                assert.equal( injector.get( "test" ), "count 1" );
+            } );
+
+
+            it( "should return cached value for container scope", function() {
+                var count = 0;
+                var factory = function() {
+                    ++count;
+                    return "count " + count;
+                };
+
+                injector.register( "test", factory, { scope: "container" } );
                 assert.equal( injector.get( "test" ), "count 1" );
                 assert.equal( injector.get( "test" ), "count 1" );
             } );
