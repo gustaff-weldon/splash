@@ -99,6 +99,9 @@ splash
 ## Changelog
 
 ### Upcoming release
+...
+
+### 0.0.2
 
 - renamed `.injector` method to `.container`
 - created container inherits factories from parent container

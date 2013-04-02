@@ -4,7 +4,7 @@
     "author": [
         "Gustaff Weldon"
     ],
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "./lib/splash",
     "repository": {
         "type": "git",
