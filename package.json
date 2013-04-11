@@ -9,5 +9,12 @@
     "repository": {
         "type": "git",
         "url": "http://github.com/gustaff-weldon/splash.git"
+    },
+    "scripts": {
+        "test" : "./node_modules/mocha/bin/mocha ./test/*-test.js"
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "chai": "*"
     }
 }
