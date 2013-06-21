@@ -1,6 +1,8 @@
 # Splash
 A spattering dependency injection ;)
 
+[![Build Status](https://drone.io/github.com/gustaff-weldon/splash/status.png)](https://drone.io/github.com/gustaff-weldon/splash/latest)
+
 ## API
 splash
 
