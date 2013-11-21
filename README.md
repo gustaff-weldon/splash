@@ -128,7 +128,8 @@ splash.register( "foo", function() {
 ## Changelog
 
 ### Upcoming release
-TBD
+- fixes invalid type of internal _cache
+
 
 ### 0.0.3
 - introduced `container` scope - only one instance of dependency per container instance
